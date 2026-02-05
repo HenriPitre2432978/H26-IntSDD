@@ -1,6 +1,9 @@
-﻿using System;
+﻿using LibraryAPI;
+using LibraryAPI.DogAPI.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -12,8 +15,6 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using LibraryAPI;
-using LibraryAPI.DogAPI.Models;
 
 namespace WpfDemoDog
 {
@@ -24,9 +25,10 @@ namespace WpfDemoDog
     {
         // Création du helper DogAPI
         DogAPIHelper dogApiHelper = new DogAPIHelper();
-        const string API_KEY = "votre_clé_d_API";
+
 
         //TODO:Modifier l’application pour gérer la clé d'API dans un fichier appsettings.json
+        private readonly string API_KEY = ConfigHelper.Config["DogApi:ApiKey"]; //confighelper va chercher la clé depuis appsettingss
 
         public MainWindow()
         {
