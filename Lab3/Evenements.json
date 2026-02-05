@@ -1,0 +1,162 @@
+[
+  {
+    "id": "evt1",
+    "titre": "Festival des Rythmes Latins",
+    "date": "2026-03-15T19:00:00",
+    "lieu": "Théâtre Banque Scotia, Saguenay",
+    "artiste": "Orquesta Salsa Boricua",
+    "prix": "45$"
+  },
+  {
+    "id": "evt2",
+    "titre": "Concert Symphonique Québec",
+    "date": "2026-03-20T20:00:00",
+    "lieu": "Salle Raoul-Jobin",
+    "artiste": "Orchestre Symphonique de Québec",
+    "prix": "35-85$"
+  },
+  {
+    "id": "evt3",
+    "titre": "Stand-up: Martin Matte",
+    "date": "2026-04-02T20:30:00",
+    "lieu": "Théâtre du Parc, Chicoutimi",
+    "artiste": "Martin Matte",
+    "prix": "55$"
+  },
+  {
+    "id": "evt4",
+    "titre": "Soirée Opéra: La Bohème",
+    "date": "2026-04-10T19:30:00",
+    "lieu": "Opéra de Québec",
+    "artiste": "Opéra de Québec",
+    "prix": "65-125$"
+  },
+  {
+    "id": "evt5",
+    "titre": "Rock Progressif: Gros Labeur",
+    "date": "2026-03-28T21:00:00",
+    "lieu": "Bar L'Insoupçonné",
+    "artiste": "Gros Labeur",
+    "prix": "25$"
+  },
+  {
+    "id": "evt6",
+    "titre": "Théâtre: Les Feluettes",
+    "date": "2026-04-18T20:00:00",
+    "lieu": "Théâtre Experimental de l'Alma",
+    "artiste": "Troupe Théâtre Alma",
+    "prix": "38$"
+  },
+  {
+    "id": "evt7",
+    "titre": "Jazz au Piano: Vic Vogel",
+    "date": "2026-03-22T19:00:00",
+    "lieu": "Café Théâtre La Basoche",
+    "artiste": "Vic Vogel Trio",
+    "prix": "30$"
+  },
+  {
+    "id": "evt8",
+    "titre": "Danse Contemporaine",
+    "date": "2026-04-05T20:00:00",
+    "lieu": "Maison de la Culture de Jonquière",
+    "artiste": "Compagnie Volte",
+    "prix": "42$"
+  },
+  {
+    "id": "evt9",
+    "titre": "Rap Québecois: Koriass",
+    "date": "2026-03-30T21:30:00",
+    "lieu": "Amphithéâtre de l'UQAC",
+    "artiste": "Koriass",
+    "prix": "40$"
+  },
+  {
+    "id": "evt10",
+    "titre": "Contes pour Adultes",
+    "date": "2026-04-12T19:00:00",
+    "lieu": "Bibliothèque Alain-Généreux",
+    "artiste": "Fred Pellerin",
+    "prix": "20$"
+  },
+  {
+    "id": "evt11",
+    "titre": "Guitare Classique",
+    "date": "2026-03-25T20:00:00",
+    "lieu": "Église Sacré-Cœur",
+    "artiste": "Philippe Dunnigan",
+    "prix": "28$"
+  },
+  {
+    "id": "evt12",
+    "titre": "Improv Comedy Night",
+    "date": "2026-04-01T21:00:00",
+    "lieu": "Le Zénith de Jonquière",
+    "artiste": "Les Impatients",
+    "prix": "22$"
+  },
+  {
+    "id": "evt13",
+    "titre": "Folk Traditionnel",
+    "date": "2026-03-18T19:30:00",
+    "lieu": "Centre Culturel du Lac",
+    "artiste": "Le Vent du Nord",
+    "prix": "35$"
+  },
+  {
+    "id": "evt14",
+    "titre": "Piano Solo: Chopin",
+    "date": "2026-04-08T20:00:00",
+    "lieu": "Conservatoire de Musique",
+    "artiste": "Louis-Philippe Descollvan",
+    "prix": "40$"
+  },
+  {
+    "id": "evt15",
+    "titre": "Cirque École",
+    "date": "2026-03-27T18:00:00",
+    "lieu": "Aréna de La Baie",
+    "artiste": "École de Cirque de Saguenay",
+    "prix": "18$"
+  },
+  {
+    "id": "evt16",
+    "titre": "Chanson Française",
+    "date": "2026-04-15T20:30:00",
+    "lieu": "Théâtre des Éurythmies",
+    "artiste": "Éric Lapointe",
+    "prix": "50$"
+  },
+  {
+    "id": "evt17",
+    "titre": "Photographie Nocturne",
+    "date": "2026-03-23T19:00:00",
+    "lieu": "Galerie d'Art du fjord",
+    "artiste": "Exposition Collective",
+    "prix": "Gratuit"
+  },
+  {
+    "id": "evt18",
+    "titre": "Beatbox Battle",
+    "date": "2026-04-03T21:00:00",
+    "lieu": "Centre communautaire",
+    "artiste": "SQBB - Saguenay",
+    "prix": "15$"
+  },
+  {
+    "id": "evt19",
+    "titre": "Poésie Slam",
+    "date": "2026-03-29T20:00:00",
+    "lieu": "Café Le Mouton Noir",
+    "artiste": "Collectif Poétique",
+    "prix": "10$"
+  },
+  {
+    "id": "evt20",
+    "titre": "Orchestre à Cordes",
+    "date": "2026-04-20T19:30:00",
+    "lieu": "Collégial International",
+    "artiste": "UQAC Strings",
+    "prix": "25$"
+  }
+]
