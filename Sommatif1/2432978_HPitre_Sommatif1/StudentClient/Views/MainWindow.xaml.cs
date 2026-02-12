@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using StudentClient.Configs;
+using StudentClient.Views;
 using System.IO;
 using System.Net.Http;
 using System.Text;
@@ -23,6 +24,8 @@ namespace StudentClient
         public MainWindow()
         {
             InitializeComponent();
+            new Students().Show(); //GOTO Students window <---------------------   
+
         }
         private async void Login_Click(object sender, RoutedEventArgs e)
         {
@@ -44,7 +47,7 @@ namespace StudentClient
 
             //Get basic header properties of the incoming rquest
             StringContent content = new(json, Encoding.UTF8, "application/json");
-
+            
             try
             {
                 HttpResponseMessage response = await client.PostAsync("login", content);
@@ -56,7 +59,8 @@ namespace StudentClient
                     LoginResponse? result = JsonConvert.DeserializeObject<LoginResponse>(await response.Content.ReadAsStringAsync()); 
                     SaveToken(result.Token); //get token of response
 
-                    new Home().Show(); //Login succesful, goto home page (en ce moment, départment)
+
+                    new Students().Show(); //GOTO Students window <---------------------   
                     this.Close(); //close login page
                 }
                 else
