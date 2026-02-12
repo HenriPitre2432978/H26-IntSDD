@@ -1,0 +1,650 @@
+{
+  "info": {
+    "_postman_id": "784c331f-bb07-4ce5-b710-5efefe9863fc",
+    "name": "2432978-Som1-StudentWebAPI",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "51835726",
+    "_collection_link": "https://go.postman.co/collection/51835726-784c331f-bb07-4ce5-b710-5efefe9863fc?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "Authentification",
+      "item": [
+        {
+          "name": "AddLogin",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "x-api-key",
+                "value": "reqres_1b1fb478207a46d19e66c1b3e5b42ec7",
+                "equals": true
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n\"email\": \"eve.holt@reqres.in\",\r\n\"password\": \"cityslicka\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://reqres.in/api/login",
+              "protocol": "https",
+              "host": [
+                "reqres",
+                "in"
+              ],
+              "path": [
+                "api",
+                "login"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Course",
+      "item": [
+        {
+          "name": "AddCourse",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"courseID\": 6,\r\n  \"name\": \"Introduction à la profession\",\r\n  \"description\": \"Cours de suite office\",\r\n  \"credits\": 1,\r\n  \"departmentID\": 1\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://localhost:7080/Course",
+              "protocol": "https",
+              "host": [
+                "localhost"
+              ],
+              "port": "7080",
+              "path": [
+                "Course"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "EditCourse",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"courseID\": 4,\r\n  \"name\": \"Cours modifié en méthode PUT\",\r\n  \"description\": \"Cours\",\r\n  \"credits\": 3,\r\n  \"departmentID\": 1\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://localhost:7080/Course/4",
+              "protocol": "https",
+              "host": [
+                "localhost"
+              ],
+              "port": "7080",
+              "path": [
+                "Course",
+                "4"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GetAllCourse",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "https://localhost:7080/Course",
+              "protocol": "https",
+              "host": [
+                "localhost"
+              ],
+              "port": "7080",
+              "path": [
+                "Course"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GetAllCourseById",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"departmentID\": 3,\r\n  \"name\": \"DepartmentModifie\"\r\n}"
+            },
+            "url": {
+              "raw": "https://localhost:7080/Course/4",
+              "protocol": "https",
+              "host": [
+                "localhost"
+              ],
+              "port": "7080",
+              "path": [
+                "Course",
+                "4"
+              ],
+              "query": [
+                {
+                  "key": "departmentID",
+                  "value": "3",
+                  "type": "text",
+                  "disabled": true
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "DeleteCourse",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"departmentID\": 3,\r\n  \"name\": \"DepartmentModifie\"\r\n}"
+            },
+            "url": {
+              "raw": "https://localhost:7080/Course/5",
+              "protocol": "https",
+              "host": [
+                "localhost"
+              ],
+              "port": "7080",
+              "path": [
+                "Course",
+                "5"
+              ],
+              "query": [
+                {
+                  "key": "departmentID",
+                  "value": "3",
+                  "type": "text",
+                  "disabled": true
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Student",
+      "item": [
+        {
+          "name": "AddStudent",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"studentID\": 7,\r\n    \"fullName\": \"eleve7\",\r\n    \"email\": \"eleve7@gmail.com\",\r\n    \"phone\": \"418-328-3204\",\r\n    \"birthDate\": \"2023-01-11T21:48:13.745Z\",\r\n    \"genderID\": 2\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://localhost:7080/Student",
+              "protocol": "https",
+              "host": [
+                "localhost"
+              ],
+              "port": "7080",
+              "path": [
+                "Student"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "EditStudent",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"studentID\": 4,\r\n    \"fullName\": \"eleveModifie\",\r\n    \"email\": \"eleveModifie@gmail.com\",\r\n    \"phone\": \"418-328-3204\",\r\n    \"birthDate\": \"2023-01-11T21:48:13.745Z\",\r\n    \"genderID\": 1\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://localhost:7080/Student/4",
+              "protocol": "https",
+              "host": [
+                "localhost"
+              ],
+              "port": "7080",
+              "path": [
+                "Student",
+                "4"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GetAllStudent",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"studentID\": 7,\r\n    \"fullName\": \"eleve7\",\r\n    \"email\": \"eleve7@gmail.com\",\r\n    \"phone\": \"418-328-3204\",\r\n    \"birthDate\": \"2023-01-11T21:48:13.745Z\",\r\n    \"genderID\": 2\r\n}"
+            },
+            "url": {
+              "raw": "https://localhost:7080/Student",
+              "protocol": "https",
+              "host": [
+                "localhost"
+              ],
+              "port": "7080",
+              "path": [
+                "Student"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GetAllStudentById",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"departmentID\": 3,\r\n  \"name\": \"DepartmentModifie\"\r\n}"
+            },
+            "url": {
+              "raw": "https://localhost:7080/Student/3",
+              "protocol": "https",
+              "host": [
+                "localhost"
+              ],
+              "port": "7080",
+              "path": [
+                "Student",
+                "3"
+              ],
+              "query": [
+                {
+                  "key": "departmentID",
+                  "value": "3",
+                  "type": "text",
+                  "disabled": true
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "DeleteStudent",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"departmentID\": 3,\r\n  \"name\": \"DepartmentModifie\"\r\n}"
+            },
+            "url": {
+              "raw": "https://localhost:7080/Student/7",
+              "protocol": "https",
+              "host": [
+                "localhost"
+              ],
+              "port": "7080",
+              "path": [
+                "Student",
+                "7"
+              ],
+              "query": [
+                {
+                  "key": "departmentID",
+                  "value": "3",
+                  "type": "text",
+                  "disabled": true
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Department",
+      "item": [
+        {
+          "name": "AddDepartment",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"departmentID\": 4,\r\n  \"name\": \"Arts Visuels\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://localhost:7080/Department",
+              "protocol": "https",
+              "host": [
+                "localhost"
+              ],
+              "port": "7080",
+              "path": [
+                "Department"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "EditDepartment",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"departmentID\": 3,\r\n  \"name\": \"DepartmentModifie\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://localhost:7080/Department/3",
+              "protocol": "https",
+              "host": [
+                "localhost"
+              ],
+              "port": "7080",
+              "path": [
+                "Department",
+                "3"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GetAllDepartment",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "https://localhost:7080/Department",
+              "protocol": "https",
+              "host": [
+                "localhost"
+              ],
+              "port": "7080",
+              "path": [
+                "Department"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GetAllDepartmentById",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"departmentID\": 3,\r\n  \"name\": \"DepartmentModifie\"\r\n}"
+            },
+            "url": {
+              "raw": "https://localhost:7080/Department/3",
+              "protocol": "https",
+              "host": [
+                "localhost"
+              ],
+              "port": "7080",
+              "path": [
+                "Department",
+                "3"
+              ],
+              "query": [
+                {
+                  "key": "departmentID",
+                  "value": "3",
+                  "type": "text",
+                  "disabled": true
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "DeleteDepartment",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"departmentID\": 3,\r\n  \"name\": \"DepartmentModifie\"\r\n}"
+            },
+            "url": {
+              "raw": "https://localhost:7080/Department/4",
+              "protocol": "https",
+              "host": [
+                "localhost"
+              ],
+              "port": "7080",
+              "path": [
+                "Department",
+                "4"
+              ],
+              "query": [
+                {
+                  "key": "departmentID",
+                  "value": "3",
+                  "type": "text",
+                  "disabled": true
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Gender",
+      "item": [
+        {
+          "name": "AddGender",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"genderID\": 4,\r\n  \"name\": \"zdsfc\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://localhost:7080/Gender",
+              "protocol": "https",
+              "host": [
+                "localhost"
+              ],
+              "port": "7080",
+              "path": [
+                "Gender"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "EditGender",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"genderID\": 4,\r\n  \"name\": \"Other\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://localhost:7080/Gender/4",
+              "protocol": "https",
+              "host": [
+                "localhost"
+              ],
+              "port": "7080",
+              "path": [
+                "Gender",
+                "4"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GetAllGender",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "https://localhost:7080/Gender",
+              "protocol": "https",
+              "host": [
+                "localhost"
+              ],
+              "port": "7080",
+              "path": [
+                "Gender"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GetAllGenderById",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"departmentID\": 3,\r\n  \"name\": \"DepartmentModifie\"\r\n}"
+            },
+            "url": {
+              "raw": "https://localhost:7080/Gender/4",
+              "protocol": "https",
+              "host": [
+                "localhost"
+              ],
+              "port": "7080",
+              "path": [
+                "Gender",
+                "4"
+              ],
+              "query": [
+                {
+                  "key": "departmentID",
+                  "value": "3",
+                  "type": "text",
+                  "disabled": true
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "DeleteGender",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"departmentID\": 3,\r\n  \"name\": \"DepartmentModifie\"\r\n}"
+            },
+            "url": {
+              "raw": "https://localhost:7080/Gender/3",
+              "protocol": "https",
+              "host": [
+                "localhost"
+              ],
+              "port": "7080",
+              "path": [
+                "Gender",
+                "3"
+              ],
+              "query": [
+                {
+                  "key": "departmentID",
+                  "value": "3",
+                  "type": "text",
+                  "disabled": true
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}
