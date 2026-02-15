@@ -9,7 +9,10 @@ using StudentClient.Models;
 
 namespace StudentClient.Consumables
 {
-    public static class DepartmentApiHelper
+    //Cette classe a été créée avant les nouvelles instruction d'ajouter la liste des cours et la possibilité d'inscrire un étudiant.
+    //Elle a donc servie de modèle pour CourseHelper, et a été mon inspiration pour le Sommatif2 Partie B en examen sommatif sans IAg. 
+
+    public static class DepartmentHelper
     {
         private static readonly HttpClient client = new()
         {

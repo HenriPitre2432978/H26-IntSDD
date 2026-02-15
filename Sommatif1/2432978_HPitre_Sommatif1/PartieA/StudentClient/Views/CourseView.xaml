@@ -1,0 +1,69 @@
+﻿<Window x:Class="StudentClient.CourseView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:StudentClient"
+        mc:Ignorable="d"
+        Title="Résumé des Cours" Height="500" Width="1200">
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <!-- Boutons -->
+        <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+            <Button Content="Afficher la liste des cours"
+                    Click="LoadCourses_Click"
+                    Margin="0,0,10,0"/>
+            <Button Content="Ajouter un étudiant"
+                    Click="AddStudent_Click"
+                    Margin="0,0,10,0"/>
+        </StackPanel>
+
+        <!-- Deux colonnes : Cours / Étudiants -->
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*" />
+                <ColumnDefinition Width="1*" />
+            </Grid.ColumnDefinitions>
+
+            <!-- Liste des cours -->
+            <ListView x:Name="lvCourses"
+                      SelectionChanged="lvCourses_SelectionChangedAsync"
+                      BorderBrush="#CCC"
+                      BorderThickness="1"
+                      Margin="0,0,10,0">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="ID" Width="60" DisplayMemberBinding="{Binding CourseID}" />
+                        <GridViewColumn Header="Nom" Width="180" DisplayMemberBinding="{Binding Name}" />
+                        <GridViewColumn Header="Description" Width="400" DisplayMemberBinding="{Binding Description}" />
+                        <GridViewColumn Header="Crédits" Width="60" DisplayMemberBinding="{Binding Credits}" />
+                        <GridViewColumn Header="ID Département" Width="60" DisplayMemberBinding="{Binding DepartmentID}" />
+                    </GridView>
+                </ListView.View>
+            </ListView>
+
+            <!-- Liste des étudiants liés -->
+            <StackPanel Grid.Column="1">
+                <TextBlock Text="Étudiants inscrits :" 
+                           FontWeight="Bold" 
+                           Margin="0,0,0,5"/>
+                <ListView x:Name="lvStudentsByCourse"
+                         BorderBrush="#CCC"
+                         BorderThickness="1">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="ID" Width="40" DisplayMemberBinding="{Binding StudentID}" />
+                            <GridViewColumn Header="Nom" Width="120" DisplayMemberBinding="{Binding FullName}" />
+                            <GridViewColumn Header="Email" Width="200" DisplayMemberBinding="{Binding Email}" />
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+            </StackPanel>
+
+        </Grid>
+    </Grid>
+</Window>

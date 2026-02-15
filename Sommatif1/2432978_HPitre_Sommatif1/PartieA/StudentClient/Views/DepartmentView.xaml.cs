@@ -8,16 +8,16 @@ namespace StudentClient
     /// <summary>
     /// Logique d'interaction pour Home.xaml
     /// </summary>
-    public partial class Home : Window
+    public partial class DepartmentView: Window
     {
-        public Home() { InitializeComponent(); }
+        public DepartmentView() { InitializeComponent(); }
 
         private async void LoadDepartments_Click(object sender, RoutedEventArgs e)
             => lvDepartments.ItemsSource = await ChargerDepartments();
 
-        private async Task<List<Department>> ChargerDepartments()
+        private static async Task<List<Department>> ChargerDepartments()
         {
-            List<Department> dptList = await DepartmentApiHelper.GetAllAsync();
+            List<Department> dptList = await DepartmentHelper.GetAllAsync();
             if (dptList == null)
             {
                 MessageBox.Show("!ERREUR! Get impossible.");
@@ -32,7 +32,7 @@ namespace StudentClient
             if (string.IsNullOrWhiteSpace(name)) return;
 
             Department dept = new() { Name = name };
-            bool success = await DepartmentApiHelper.PostAsync(dept);
+            bool success = await DepartmentHelper.PostAsync(dept);
 
             MessageBox.Show(success ? "Ajout réussi !" : "!ERREUR! Ajout impossible.");
             lvDepartments.ItemsSource = await ChargerDepartments(); //refetch pour voir le changement dans la listeview
@@ -42,7 +42,7 @@ namespace StudentClient
         {
             if (lvDepartments.SelectedItem is Department selected)
             {
-                bool success = await DepartmentApiHelper.DeleteAsync(selected.DepartmentID);
+                bool success = await DepartmentHelper.DeleteAsync(selected.DepartmentID);
                 MessageBox.Show(success ? "Supprimé !" : "!ERREUR! Suppression impossible.");
                 lvDepartments.ItemsSource = await ChargerDepartments(); //refetch pour voir le changement dans la listeview
             }

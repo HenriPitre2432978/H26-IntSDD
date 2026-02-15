@@ -1,17 +1,10 @@
-﻿using Newtonsoft.Json;
+﻿using Microsoft.VisualBasic;
+using Newtonsoft.Json;
 using StudentClient.Configs;
 using System.IO;
 using System.Net.Http;
 using System.Text;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace StudentClient
 {
@@ -24,6 +17,21 @@ namespace StudentClient
         {
             InitializeComponent();
         }
+
+
+        private void Bypass_Click(object sender, RoutedEventArgs e)
+        {
+                string? choice = Interaction.InputBox(
+                                "Choisissez une option :\n" +
+                                "1. Menu des Cours\n" +
+                                "2. Menu des Départements", "Choix du menu", "1");
+                if (choice == "1")
+                    new CourseView().Show();
+                else if (choice == "2")
+                    new DepartmentView().Show();
+
+                this.Close(); //close login page
+        }
         private async void Login_Click(object sender, RoutedEventArgs e)
         {
             #region Properties
@@ -31,7 +39,7 @@ namespace StudentClient
             string email = txtEmail.Text;
             string password = txtPassword.Password;
 
-            var loginData = new {  email, password }; //Un string[] ne marche pas ??
+            var loginData = new { email, password }; //Un string[] ne marche pas ??
             string json = JsonConvert.SerializeObject(loginData);
 
 
@@ -48,15 +56,22 @@ namespace StudentClient
             try
             {
                 HttpResponseMessage response = await client.PostAsync("login", content);
-                if (response.IsSuccessStatusCode) //is respondes ok ? (200) or bad ? (4XX Bad request)
+                if (response.IsSuccessStatusCode)//is respondes ok ? (200) or bad ? (4XX Bad request)
                 {
                     lblStatus.Text = "Redirection...";
 
                     //deserialize the response into a LoginResponse object with the Token property instanciated
-                    LoginResponse? result = JsonConvert.DeserializeObject<LoginResponse>(await response.Content.ReadAsStringAsync()); 
+                    LoginResponse? result = JsonConvert.DeserializeObject<LoginResponse>(await response.Content.ReadAsStringAsync());
                     SaveToken(result.Token); //get token of response
 
-                    new Home().Show(); //Login succesful, goto home page (en ce moment, départment)
+                    string? choice = Interaction.InputBox(
+                                    "Choisissez une option :\n1. Menu des Cours\n2. Menu des Départements",
+                                    "Choix du menu", "1");
+                    if (choice == "1")
+                        new CourseView().Show();
+                    else if (choice == "2")
+                        new DepartmentView().Show();
+
                     this.Close(); //close login page
                 }
                 else
@@ -75,11 +90,12 @@ namespace StudentClient
 
             //Get config as dynamic to modify the token property (Aide avec l'IA ici)
             dynamic config = JsonConvert.DeserializeObject(json);
-            if (config != null ) config["Token"] = token; 
-             
+            if (config != null) config["Token"] = token;
+
             //Write the token
             File.WriteAllText("appsettings.json", JsonConvert.SerializeObject(config, Formatting.Indented));
         }
+
     }
 
     //json class to deseralise response of login (get token)
