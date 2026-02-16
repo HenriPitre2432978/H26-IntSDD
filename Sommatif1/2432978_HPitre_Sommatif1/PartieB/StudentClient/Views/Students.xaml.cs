@@ -1,4 +1,5 @@
-﻿using StudentClient.Models;
+﻿using StudentClient.Consumables;
+using StudentClient.Models;
 using System.ComponentModel;
 using System.Windows;
 
@@ -54,5 +55,20 @@ namespace StudentClient.Views
             this.DataContext = new StudentList();
             InitializeComponent();
         }
+
+        private async void LoadStd_Click(object sender, RoutedEventArgs e)
+    => datagrid.ItemsSource = await ChargerStd();
+
+        private static async Task<List<Student>?> ChargerStd()
+        {
+            List<Student> stdList = await StudentHelper.GetAllAsync(); // CECI NE FONCTIONNE PAS ET EMPÈCHE LE FONCTIONNEMENT ENTIER DU PROGRAMME
+            if (stdList == null)
+            {
+                MessageBox.Show("!ERREUR! Get impossible.");
+                return [];
+            }
+            return stdList;
+        }
+
     }
 }

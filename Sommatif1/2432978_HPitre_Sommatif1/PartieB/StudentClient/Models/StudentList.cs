@@ -98,10 +98,10 @@ namespace StudentClient.Models
 
         #region Méthodes relatives aux élèves
 
-        //private async void LoadDepartments_Click(object sender, RoutedEventArgs e)
-        //    => lvDepartments.ItemsSource = await ChargerDepartments();
+        //private async void LoadStudents_Click(object sender, RoutedEventArgs e)
+        //    => lvStudents.ItemsSource = await ChargerStudents();
 
-        private static async Task<List<Student>> ChargerStd()
+        private static async Task<List<Student>?> ChargerStd()
         {
             List<Student> stdList = await StudentHelper.GetAllAsync(); // CECI NE FONCTIONNE PAS ET EMPÈCHE LE FONCTIONNEMENT ENTIER DU PROGRAMME
             if (stdList == null)
@@ -121,11 +121,11 @@ namespace StudentClient.Models
 
         private async void EffacerStd(object sender, RoutedEventArgs e)
         {
-            //if (lvDepartments.SelectedItem is Department selected)
+            //if (lvStudents.SelectedItem is Student selected)
             //{
-            //    bool success = await DepartmentApiHelper.DeleteAsync(selected.DepartmentID);
+            //    bool success = await StudentApiHelper.DeleteAsync(selected.StudentID);
             //    MessageBox.Show(success ? "Supprimé !" : "!ERREUR! Suppression impossible.");
-            //    lvDepartments.ItemsSource = await ChargerDepartments(); //refetch pour voir le changement dans la listeview
+            //    lvStudents.ItemsSource = await ChargerStudents(); //refetch pour voir le changement dans la listeview
             //}
         }
 

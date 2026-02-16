@@ -1,35 +1,16 @@
-﻿using StudentClient.Configs;
-using StudentClient.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
+using StudentClient.Configs;
+using StudentClient.Models;
 
 namespace StudentClient.Consumables
 {
-    /*
-     NOTE M. EMMANUEL:
-
-    Ceci est le gestionnaire des requêtes envoyées pour GET, POST, PUT et DELETE les students.
-    Je sais que ceci est supposé fonctionner correctement puisque je l'ai essayé hier soir en travaillant sur ma Partie A avec les éléments Department au lieu de Student.
-    À ce moment même, il semblerait que mon GetAsync reste bloqué dans une boucle infinie qui ne s'arrête jamais, rendant impossible l'obtention des Student. 
-    Ce problème n'était et n'est toujours pas présent lorsque je GetAsync Department, et pourtant je le fais exactement de la même façon. 
-
-
- Au cours de ce sommatif, je n'ai pas eu le temps de déceler le problème exact et de le régler, alors rien ne s'affiche dans le ListView et au démarrage de mon projet. 
- Pour tenter de gagner des points, j'ai tout de même continué de coder la logique en faisant comme si tout fonctionnait, 
- mais je n'ai pas eu le temps de finir car j'ai passé une bonne partie du temps à essayer de régler le problème source.
-
- Alternativement, si vous estimez que vous ne pouvez pas évaluer grand chose de ce sommatif, 
- vous pouvez regarder mon Sommatif1 Partie A où je fais la consommation d'API sans problème pour la section département.
- Je l'avais fait à l'avance dans le but de mieux comprendre et me préparer pour aujourd'hui, mais il semblerait que le GetAsync m'en a empêché. Bonne journée.
-
- 
-     */
-
+    //Cette classe a été créée avant les nouvelles instruction d'ajouter la liste des cours et la possibilité d'inscrire un étudiant.
+    //Elle a donc servie de modèle pour CourseHelper, et a été mon inspiration pour le Sommatif2 Partie B en examen sommatif sans IAg. 
 
     public static class StudentHelper
     {
@@ -43,8 +24,7 @@ namespace StudentClient.Consumables
         {
             try
             {
-                // ----------------- ICI --------------------- 
-                HttpResponseMessage? response = await client.GetAsync("Student"); //CECI lance une boucle infinie qui empêche le programme de fonctionner. !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                HttpResponseMessage response = await client.GetAsync("Student");
                 if (!response.IsSuccessStatusCode) return null;//If response = 200, return true, else false
 
                 string json = await response.Content.ReadAsStringAsync();
@@ -71,9 +51,9 @@ namespace StudentClient.Consumables
 
         #region POST Methods
 
-        public static async Task<bool> PostAsync(Student std)
+        public static async Task<bool> PostAsync(Student dept)
         {
-            string json = JsonSerializer.Serialize(std);
+            string json = JsonSerializer.Serialize(dept);
             StringContent content = new(json, Encoding.UTF8, "application/json");
 
             HttpResponseMessage response = await client.PostAsync("Student", content);
@@ -85,9 +65,9 @@ namespace StudentClient.Consumables
         #region PUT Methods 
 
         //Logiquement ^^ que POST sauf avec {id} en ajout dnas le lien
-        public static async Task<bool> PutAsync(int id, Student std)
+        public static async Task<bool> PutAsync(int id, Student dept)
         {
-            string json = JsonSerializer.Serialize(std);
+            string json = JsonSerializer.Serialize(dept);
             var content = new StringContent(json, Encoding.UTF8, "application/json");
 
             var response = await client.PutAsync($"Student/{id}", content);
@@ -107,4 +87,3 @@ namespace StudentClient.Consumables
         #endregion
     }
 }
-

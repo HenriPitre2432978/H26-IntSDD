@@ -80,8 +80,8 @@
                     </Border>
 
 
-                    <DataGrid Grid.Row="1"
-                           ItemsSource="{Binding Students}"
+                    <DataGrid x:Name="datagrid" Grid.Row="1"
+                           
                            SelectedItem="{Binding StudentSelectionne}"
                            AutoGenerateColumns="False"
                            CanUserAddRows="False"
@@ -225,7 +225,7 @@
                              BorderBrush="#FF0F7B6C"
                              FontSize="16"
                              FontWeight="SemiBold"
-                             Command="{Binding UpdateStudentCommand}">
+                             Click="LoadStd_Click">
                             <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                                 <TextBlock Text="💾" FontSize="18" Margin="0,0,10,0"/>
                                 <TextBlock Text="Mettre à jour"/>
