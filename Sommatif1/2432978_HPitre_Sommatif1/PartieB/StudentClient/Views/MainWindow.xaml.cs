@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using Microsoft.VisualBasic;
+using Newtonsoft.Json;
 using StudentClient.Configs;
 using StudentClient.Views;
 using System.IO;
@@ -24,8 +25,14 @@ namespace StudentClient
         public MainWindow()
         {
             InitializeComponent();
-            new Students().Show(); //GOTO Students window <---------------------   
 
+        }
+
+        private void Bypass_Click(object sender, RoutedEventArgs e)
+        {
+           new Students().Show();
+
+            this.Close(); //close login page
         }
         private async void Login_Click(object sender, RoutedEventArgs e)
         {
