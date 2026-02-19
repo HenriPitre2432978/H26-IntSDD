@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:StudentClient.Views"
         xmlns:model="clr-namespace:StudentClient.Models"
         mc:Ignorable="d"
-        d:DataContext="{d:DesignInstance Type=model:StudentList}"
+        d:DataContext="{d:DesignInstance Type=model:Handler}"
         Title="Students" Height="772" Width="1271"
         WindowStartupLocation="CenterScreen"
         Background="#FFF2F4F7">
@@ -81,7 +81,7 @@
 
 
                     <DataGrid x:Name="datagrid" Grid.Row="1"
-                           
+                           ItemsSource="{Binding StudentsView}"
                            SelectedItem="{Binding StudentSelectionne}"
                            AutoGenerateColumns="False"
                            CanUserAddRows="False"
@@ -113,7 +113,8 @@
 
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="ID" Binding="{Binding StudentID}" Width="90"/>
-                            <DataGridTextColumn Header="Nom Prénom" Binding="{Binding FullName}" Width="*"/>
+                            <DataGridTextColumn Header="Nom, Prénom" Binding="{Binding FullNameFormatted}" Width="*"/>
+                            <DataGridTextColumn Header="Genre" Binding="{Binding Gender}" Width="*"/>
                         </DataGrid.Columns>
                     </DataGrid>
                 </Grid>
@@ -176,18 +177,18 @@
                               Text="{Binding StudentSelectionne.StudentID}" IsReadOnly="True"/>
 
                         <TextBlock Grid.Row="0" Grid.Column="3" Text="Genre:" Foreground="#FF51606F" VerticalAlignment="Center"/>
-                        <ComboBox Grid.Row="0" Grid.Column="4" Height="38" Padding="10,0"
-                               VerticalContentAlignment="Center"
-                               Background="#FFF6F8FB" BorderBrush="#FFE3E7EE" BorderThickness="1"
-                               ItemsSource="{Binding Genders}"
-                               SelectedItem="{Binding StudentSelectionne}"/>
+                        <ComboBox Grid.Row="0" Grid.Column="4"
+                                    ItemsSource="{Binding Genders}"
+                                    DisplayMemberPath="Name"
+                                    SelectedValuePath="GenderID"
+                                    SelectedValue="{Binding StudentSelectionne.GenderID}"/>
 
                         <!-- Row 2 -->
                         <TextBlock Grid.Row="2" Grid.Column="0" Text="Nom:" Foreground="#FF51606F" VerticalAlignment="Center"/>
                         <TextBox Grid.Row="2" Grid.Column="1" Height="38" Padding="10,0"
                               VerticalContentAlignment="Center"
                               Background="#FFF6F8FB" BorderBrush="#FFE3E7EE" BorderThickness="1"
-                              Text="{Binding StudentSelectionne, UpdateSourceTrigger=PropertyChanged}"/>
+                              Text="{Binding StudentSelectionne.FullName, Converter={StaticResource FullNameToPartConverter}, ConverterParameter=LName, UpdateSourceTrigger=PropertyChanged}"/>
 
                         <TextBlock Grid.Row="2" Grid.Column="3" Text="Phone:" Foreground="#FF51606F" VerticalAlignment="Center"/>
                         <TextBox Grid.Row="2" Grid.Column="4" Height="38" Padding="10,0"
@@ -200,7 +201,7 @@
                         <TextBox Grid.Row="4" Grid.Column="1" Height="38" Padding="10,0"
                               VerticalContentAlignment="Center"
                               Background="#FFF6F8FB" BorderBrush="#FFE3E7EE" BorderThickness="1"
-                              Text="{Binding StudentSelectionne, UpdateSourceTrigger=PropertyChanged}"/>
+                              Text="{Binding StudentSelectionne.FullName, Converter={StaticResource FullNameToPartConverter}, ConverterParameter=FName, UpdateSourceTrigger=PropertyChanged}"/>
 
                         <TextBlock Grid.Row="4" Grid.Column="3" Text="Email:" Foreground="#FF51606F" VerticalAlignment="Center"/>
                         <TextBox Grid.Row="4" Grid.Column="4" Height="38" Padding="10,0"
@@ -224,8 +225,7 @@
                              Foreground="White"
                              BorderBrush="#FF0F7B6C"
                              FontSize="16"
-                             FontWeight="SemiBold"
-                             Click="LoadStd_Click">
+                             FontWeight="SemiBold">
                             <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                                 <TextBlock Text="💾" FontSize="18" Margin="0,0,10,0"/>
                                 <TextBlock Text="Mettre à jour"/>

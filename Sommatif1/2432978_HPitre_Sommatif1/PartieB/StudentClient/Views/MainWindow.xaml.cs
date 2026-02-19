@@ -1,6 +1,7 @@
 ﻿using Microsoft.VisualBasic;
 using Newtonsoft.Json;
 using StudentClient.Configs;
+using StudentClient.Models;
 using StudentClient.Views;
 using System.IO;
 using System.Net.Http;
@@ -22,15 +23,15 @@ namespace StudentClient
     /// </summary>
     public partial class MainWindow : Window
     {
+        Handler stdListObj = new();
         public MainWindow()
         {
             InitializeComponent();
-
         }
 
         private void Bypass_Click(object sender, RoutedEventArgs e)
         {
-           new Students().Show();
+           new Students(stdListObj).Show();
 
             this.Close(); //close login page
         }
@@ -67,7 +68,7 @@ namespace StudentClient
                     SaveToken(result.Token); //get token of response
 
 
-                    new Students().Show(); //GOTO Students window <---------------------   
+                    new Students(stdListObj).Show(); //GOTO Students window <---------------------   
                     this.Close(); //close login page
                 }
                 else

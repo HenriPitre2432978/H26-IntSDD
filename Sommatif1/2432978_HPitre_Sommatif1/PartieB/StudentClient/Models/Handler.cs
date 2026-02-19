@@ -10,51 +10,47 @@ using System.Globalization;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows;
+using System.Windows.Data;
 using System.Xml.Linq;
 
 namespace StudentClient.Models
 {
-    /*
-     NOTE M. EMMANUEL:
-            
-    J'ai eu un problème avec ma requête GetAsync (voir le fichier StudentHelper.cs) et même avec votre aide, nous n'avons pas réussi à régler le problème.
-
-
-    Au cours de ce sommatif, je n'ai pas eu le temps de déceler le problème exact et de le régler, alors rien ne s'affiche dans le ListView et au démarrage de mon projet. 
-    Pour tenter de gagner des points, j'ai tout de même continué de coder la logique en faisant comme si tout fonctionnait, 
-    mais je n'ai pas eu le temps de finir car j'ai passé une bonne partie du temps à essayer de régler le problème source.
-
-    Alternativement, si vous estimez que vous ne pouvez pas évaluer grand chose de ce sommatif, 
-    vous pouvez regarder mon Sommatif1 Partie A où je fais la consommation d'API sans problème pour la section département.
-    Je l'avais fait à l'avance dans le but de mieux comprendre et me préparer pour aujourd'hui, mais il semblerait que le GetAsync m'en a empêché. Bonne journée.
-     
-     */
-
-    public class StudentList : BaseViewModel, INotifyPropertyChanged
+    public class Handler : BaseViewModel, INotifyPropertyChanged
     {
         #region Propriétés
-        private static List<Student> _students => ChargerStd().Result;
-        
-        public ObservableCollection<Student> Students
+        public ObservableCollection<Gender> _genders =new();
+        public ObservableCollection<Gender> Genders
         {
-            get
+            get => _genders;
+            set
             {
-                if (string.IsNullOrWhiteSpace(Recherche))
-                    return new ObservableCollection<Student>(_students);
-                else
-                {
-                    ObservableCollection<Student> result = [];
-                    string recherche = Recherche.ToLower();
-
-                   foreach (Student s in (IEnumerable<Student>)_students)
-                    {
-                        if (s.FullName.Contains(recherche) || s.Phone.Contains(recherche) || s.StudentID.ToString().Contains(recherche))
-                            result.Add(s);
-                    }
-                    return result;
-                }
+                _genders = value;
+                OnPropertyChanged(nameof(Genders));
             }
         }
+
+        private ObservableCollection<Student> _students = new();
+        public ObservableCollection<Student> Students
+        {
+            get => _students;
+            set
+            {
+                _students = value;
+                OnPropertyChanged(nameof(Students));
+            }
+        }
+
+        private ICollectionView _studentsView;
+        public ICollectionView StudentsView
+        {
+            get => _studentsView;
+            set
+            {
+                _studentsView = value;
+                OnPropertyChanged(nameof(StudentsView));
+            }
+        }
+
 
         private Student? _studentSelectionne = null;
         public Student? StudentSelectionne
@@ -79,7 +75,7 @@ namespace StudentClient.Models
                 {
                     _recherche = value;
                     OnPropertyChanged(nameof(Recherche));
-                    OnPropertyChanged(nameof(Students));
+                    StudentsView?.Refresh();
                 }
             }
         }
@@ -90,27 +86,82 @@ namespace StudentClient.Models
         #endregion
 
         // Constructeur
-        public StudentList()
+        public Handler()
         {
-            //Assignation des commandes
+            StudentsView = CollectionViewSource.GetDefaultView(Students);
+            StudentsView.Filter = FilterStudents;
 
+            _ = LoadStudentsAsync(); // NOTE: _ permet de contourner le await impossible dans une méthode pas async, en mettant une variable dumped par après
+            _ = LoadGendersAsync(); // NOTE: _ permet de contourner le await impossible dans une méthode pas async, en mettant une variable dumped par après
         }
 
         #region Méthodes relatives aux élèves
-
-        //private async void LoadStudents_Click(object sender, RoutedEventArgs e)
-        //    => lvStudents.ItemsSource = await ChargerStudents();
-
-        private static async Task<List<Student>?> ChargerStd()
+        private async Task LoadStudentsAsync()
         {
-            List<Student> stdList = await StudentHelper.GetAllAsync(); // CECI NE FONCTIONNE PAS ET EMPÈCHE LE FONCTIONNEMENT ENTIER DU PROGRAMME
-            if (stdList == null)
+            List<Student> list = await StudentHelper.GetAllAsync();
+
+            if (list == null)
             {
-                MessageBox.Show("!ERREUR! Get impossible.");
-                return [];
+                MessageBox.Show("!ERREUR! Get STUDENTS impossible.");
+                return;
             }
-            return stdList;
+
+            Students.Clear();
+            foreach (Student student in list)
+            {
+                student.Gender = Genders.FirstOrDefault(g => g.GenderID == student.GenderID)?.Name ?? ""; //Get gender corresponding to id of student's genre
+
+                Students.Add(student);
+            }
         }
+
+        private async Task LoadGendersAsync()
+        {
+            List<Gender> list = await GenderHelper.GetAllAsync();
+
+            if (list == null)
+            {
+                MessageBox.Show("!ERREUR! Get GENDERS impossible.");
+                return;
+            }
+
+            Genders.Clear();
+            foreach (Gender g in list)
+                Genders.Add(g);
+        }
+
+        /// <summary>
+        /// Filtrer les étudiants par leur genre, nom ou ID, en ignorant les accents et la casse
+        /// </summary>
+        /// <param name="obj">Filter d'une ICollection (Ici, d'un StudentView)</param>
+        /// <returns>True si réussite</returns>
+        private bool FilterStudents(object obj)
+        {
+            Student s = (Student)obj; 
+
+            if (string.IsNullOrWhiteSpace(Recherche))
+                return true;
+
+            string r = Recherche.ToLower();
+
+            //CultureInfo et CompareOption pour rechercher en ignorant la Culture (accents)
+            return
+
+                //Search by name
+                CultureInfo.CurrentCulture.CompareInfo.IndexOf(
+                    s.FullName, Recherche, 
+                    CompareOptions.IgnoreCase | CompareOptions.IgnoreNonSpace) >= 0 ||
+
+                //Search by gender
+                CultureInfo.CurrentCulture.CompareInfo.IndexOf(
+                    Genders.FirstOrDefault(g => g.GenderID == s.GenderID)?.Name.ToString() ?? "", Recherche, 
+                    CompareOptions.IgnoreCase | CompareOptions.IgnoreNonSpace) >= 0 ||
+
+                //Search by ID
+                s.StudentID.ToString().Contains(Recherche);
+        }
+
+
 
         private async void AjouterStd(Student s)
         {

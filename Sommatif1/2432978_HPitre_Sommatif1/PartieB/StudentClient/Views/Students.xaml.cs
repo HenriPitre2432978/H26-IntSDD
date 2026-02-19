@@ -10,20 +10,6 @@ namespace StudentClient.Views
     /// </summary>
     public partial class Students : Window
     {
-        /*
-  NOTE M. EMMANUEL:
-
-        J'ai eu un problème avec ma requête GetAsync (voir le fichier StudentHelper.cs) et même avec votre aide, nous n'avons pas réussi à régler le problème.
-
- Au cours de ce sommatif, je n'ai pas eu le temps de déceler le problème exact et de le régler, alors rien ne s'affiche dans le ListView et au démarrage de mon projet. 
- Pour tenter de gagner des points, j'ai tout de même continué de coder la logique en faisant comme si tout fonctionnait, 
- mais je n'ai pas eu le temps de finir car j'ai passé une bonne partie du temps à essayer de régler le problème source.
-
- Alternativement, si vous estimez que vous ne pouvez pas évaluer grand chose de ce sommatif, 
- vous pouvez regarder mon Sommatif1 Partie A où je fais la consommation d'API sans problème pour la section département.
- Je l'avais fait à l'avance dans le but de mieux comprendre et me préparer pour aujourd'hui, mais il semblerait que le GetAsync m'en a empêché. Bonne journée.
-
-  */
 
         #region Implémentation INotifyPropertyChanged (Can't use BaseViewModel dans Window)
         /// <summary>
@@ -50,24 +36,10 @@ namespace StudentClient.Views
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
         #endregion
 
-        public Students()
+        public Students(Handler stdListData)
         {
-            this.DataContext = new StudentList();
+            DataContext = stdListData;
             InitializeComponent();
-        }
-
-        private async void LoadStd_Click(object sender, RoutedEventArgs e)
-    => datagrid.ItemsSource = await ChargerStd();
-
-        private static async Task<List<Student>?> ChargerStd()
-        {
-            List<Student> stdList = await StudentHelper.GetAllAsync(); // CECI NE FONCTIONNE PAS ET EMPÈCHE LE FONCTIONNEMENT ENTIER DU PROGRAMME
-            if (stdList == null)
-            {
-                MessageBox.Show("!ERREUR! Get impossible.");
-                return [];
-            }
-            return stdList;
         }
 
     }
