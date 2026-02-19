@@ -253,7 +253,7 @@
                             </Border>
 
                             <ListView Grid.Row="1"
-                                   ItemsSource="{Binding SelectedStudent.Courses}"
+                                   ItemsSource="{Binding Courses}"
                                    BorderThickness="0"
                                    Background="White"
                                    Margin="0"

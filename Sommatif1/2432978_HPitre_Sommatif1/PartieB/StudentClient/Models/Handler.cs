@@ -18,7 +18,7 @@ namespace StudentClient.Models
     public class Handler : BaseViewModel, INotifyPropertyChanged
     {
         #region Propriétés
-        public ObservableCollection<Gender> _genders =new();
+        public ObservableCollection<Gender> _genders = new();
         public ObservableCollection<Gender> Genders
         {
             get => _genders;
@@ -26,6 +26,17 @@ namespace StudentClient.Models
             {
                 _genders = value;
                 OnPropertyChanged(nameof(Genders));
+            }
+        }
+
+        public ObservableCollection<Gender> _courses = new();
+        public ObservableCollection<Gender> Courses
+        {
+            get => _courses;
+            set
+            {
+                _genders = value;
+                OnPropertyChanged(nameof(Courses));
             }
         }
 
@@ -65,6 +76,21 @@ namespace StudentClient.Models
                 }
             }
         }
+
+        private Student? _courseSelectionne = null;
+        public Student? CourseSelectionne
+        {
+            get => _courseSelectionne;
+            set
+            {
+                if (_courseSelectionne != value)
+                {
+                    _courseSelectionne = value;
+                    OnPropertyChanged(nameof(CourseSelectionne));
+                }
+            }
+        }
+
         private string? _recherche;
         public string? Recherche
         {

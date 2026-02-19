@@ -14,6 +14,8 @@ namespace StudentClient.Models
 
         public string Gender {get;set;}
 
+
+
     }
 }
 
