@@ -14,7 +14,11 @@
             <TextBlock Text="Password:" />
             <PasswordBox x:Name="txtPassword" Margin="0,5" />
             <Button Content="Login" Click="Login_Click" Margin="0,15" />
+            
+            <!--Bouton conceptuel ajouté par practicité; celui-ci ne figurerait évidemment pas dans un projet hors-scolaire. 
+            Le Login est fonctionnel également et enregistre le token de connexion dans LoginResponse visible dans MainWindow.xaml.cs tant que la session du programme est lancée. Celui-ci s'efface à la fin du programme-->
             <Button Content="Bypass" Click="Bypass_Click" Margin="300, 0" />
+            
             <TextBlock x:Name="lblStatus" Foreground="Red" Margin="0,5" />
         </StackPanel>
     </Grid>

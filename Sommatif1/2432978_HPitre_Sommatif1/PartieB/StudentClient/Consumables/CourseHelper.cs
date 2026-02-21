@@ -63,5 +63,34 @@ namespace StudentClient.Consumables
         }
 
         #endregion
+
+        #region PUT Methods
+        public static async Task<bool> PutAsync(int id, Course course)
+        {
+            string json = JsonSerializer.Serialize(course);
+            var content = new StringContent(json, Encoding.UTF8, "application/json");
+
+            var response = await client.PutAsync($"Course/{id}", content);
+            return response.IsSuccessStatusCode;
+        }
+
+        #endregion
+
+        #region DEL Methods
+        public static async Task<bool> DeleteAsync(int id)
+        {
+            var response = await client.DeleteAsync($"Course/{id}");
+            return response.IsSuccessStatusCode;
+        }
+
+        public static async Task<bool> DeleteStudentCourseAsync(int courseId, int studentId)
+        {
+            var response = await client.DeleteAsync(
+                $"Course/deleteStudentCourse/{courseId}/{studentId}");
+
+            return response.IsSuccessStatusCode;
+        }
+
+        #endregion
     }
 }

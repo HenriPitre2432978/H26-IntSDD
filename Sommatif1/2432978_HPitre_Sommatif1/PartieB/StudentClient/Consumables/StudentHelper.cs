@@ -1,11 +1,12 @@
-﻿using System;
+﻿using StudentClient.Configs;
+using StudentClient.Models;
+using StudentClient.Views;
+using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
-using StudentClient.Configs;
-using StudentClient.Models;
 
 namespace StudentClient.Consumables
 {
@@ -62,9 +63,9 @@ namespace StudentClient.Consumables
         #region PUT Methods 
 
         //Logiquement ^^ que POST sauf avec {id} en ajout dnas le lien
-        public static async Task<bool> PutAsync(int id, Student dept)
+        public static async Task<bool> PutAsync(int id, Student std)
         {
-            string json = JsonSerializer.Serialize(dept);
+            string json = JsonSerializer.Serialize(std);
             var content = new StringContent(json, Encoding.UTF8, "application/json");
 
             var response = await client.PutAsync($"Student/{id}", content);

@@ -23,7 +23,7 @@ namespace StudentClient
     /// </summary>
     public partial class MainWindow : Window
     {
-        Handler stdListObj = new();
+        Handler theHandler= new();
         public MainWindow()
         {
             InitializeComponent();
@@ -31,13 +31,13 @@ namespace StudentClient
 
         private void Bypass_Click(object sender, RoutedEventArgs e)
         {
-           new Students(stdListObj).Show();
+           new Students(theHandler).Show();
 
             this.Close(); //close login page
         }
         private async void Login_Click(object sender, RoutedEventArgs e)
         {
-            #region Properties
+            #region Propriétés
 
             string email = txtEmail.Text;
             string password = txtPassword.Password;
@@ -45,30 +45,29 @@ namespace StudentClient
             var loginData = new {  email, password }; //Un string[] ne marche pas ??
             string json = JsonConvert.SerializeObject(loginData);
 
-
-            #endregion
-
-            //Instanciate Client and assign base properties (api/link)
+            //Instancier Client et assign base properties (api/link)
             using HttpClient client = new();
             client.BaseAddress = new System.Uri(ConfigHelper.publicAPIBaseUrl);
             client.DefaultRequestHeaders.Add("x-api-key", ConfigHelper.ApiKey);
 
             //Get basic header properties of the incoming rquest
             StringContent content = new(json, Encoding.UTF8, "application/json");
-            
+
+            #endregion
+
             try
             {
                 HttpResponseMessage response = await client.PostAsync("login", content);
-                if (response.IsSuccessStatusCode) //is respondes ok ? (200) or bad ? (4XX Bad request)
+                if (response.IsSuccessStatusCode) //is respons ok ? (200) or bad ? (4XX Bad request)
                 {
                     lblStatus.Text = "Redirection...";
 
                     //deserialize the response into a LoginResponse object with the Token property instanciated
                     LoginResponse? result = JsonConvert.DeserializeObject<LoginResponse>(await response.Content.ReadAsStringAsync()); 
-                    SaveToken(result.Token); //get token of response
+                    SaveToken(result.Token); //save token of response
 
 
-                    new Students(stdListObj).Show(); //GOTO Students window <---------------------   
+                    new Students(theHandler).Show(); //GOTO Students window <---------------------   
                     this.Close(); //close login page
                 }
                 else
@@ -89,7 +88,7 @@ namespace StudentClient
             dynamic config = JsonConvert.DeserializeObject(json);
             if (config != null ) config["Token"] = token; 
              
-            //Write the token
+            //Enregistrer token dans LoginResponse comme "objet"
             File.WriteAllText("appsettings.json", JsonConvert.SerializeObject(config, Formatting.Indented));
         }
     }

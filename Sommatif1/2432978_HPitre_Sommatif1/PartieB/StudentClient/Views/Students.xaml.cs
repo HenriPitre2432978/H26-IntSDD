@@ -2,6 +2,7 @@
 using StudentClient.Models;
 using System.ComponentModel;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace StudentClient.Views
 {
@@ -42,5 +43,31 @@ namespace StudentClient.Views
             InitializeComponent();
         }
 
+        //Dans un contexte de MVVM parfait, il faudrait utiliser des commandes ainsi qu'un ViewModel fort.
+        //Étant donné que la note n'est pas basée sur l'implémentation de MVVM, j'utilise des Click pour simplifier la gestion des évènements,
+        //et utilise un Handler comme DataContext au lieu de ViewModels dédiés
+        private void EditCourse_Click(object sender, RoutedEventArgs e)
+        {
+            if (sender is Button btn && btn.CommandParameter is Course course)
+                if (DataContext is Handler handler)
+                    Handler.EditCourse(course);
+        }
+        private void DeleteCourse_Click(object sender, RoutedEventArgs e)
+        {
+            if (sender is Button btn && btn.CommandParameter is Course course)
+                if (DataContext is Handler handler)
+                    handler.DeleteCourse(course);
+        }
+
+        private void MettreAJour_Click(object sender, RoutedEventArgs e)
+        {
+            if (DataContext is Handler handler)
+                handler.MettreAJourStudent();
+        }
+        private void InscrireCours_Click(object sender, RoutedEventArgs e)
+        {
+            if (DataContext is Handler handler)
+                handler.InscrireCours();
+        }
     }
 }

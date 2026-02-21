@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
-namespace StudentClient.ViewModel
+namespace StudentClient.ViewModel.Commands
 {
     public class RelaisCommande :ICommand
     {

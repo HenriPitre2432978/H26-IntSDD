@@ -45,42 +45,5 @@ namespace StudentClient.Consumables
         }
 
         #endregion
-
-        //#region POST Methods
-
-        //public static async Task<bool> PostAsync(Student dept)
-        //{
-        //    string json = JsonSerializer.Serialize(dept);
-        //    StringContent content = new(json, Encoding.UTF8, "application/json");
-
-        //    HttpResponseMessage response = await client.PostAsync("Student", content);
-        //    return response.IsSuccessStatusCode; //If response = 200, return true, else false
-        //}
-
-        //#endregion
-
-        //#region PUT Methods 
-
-        ////Logiquement ^^ que POST sauf avec {id} en ajout dnas le lien
-        //public static async Task<bool> PutAsync(int id, Student dept)
-        //{
-        //    string json = JsonSerializer.Serialize(dept);
-        //    var content = new StringContent(json, Encoding.UTF8, "application/json");
-
-        //    var response = await client.PutAsync($"Student/{id}", content);
-        //    return response.IsSuccessStatusCode; //If response = 200, return true, else false
-        //}
-
-        //#endregion
-
-        //#region DELETE Methods
-
-        //public static async Task<bool> DeleteAsync(int id)
-        //{
-        //    var response = await client.DeleteAsync($"Student/{id}");
-        //    return response.IsSuccessStatusCode; //If response = 200, return true, else false
-        //}
-
-        //#endregion
     }
 }
